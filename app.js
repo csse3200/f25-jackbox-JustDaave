@@ -1,31 +1,55 @@
     const API_URL = "https://jackbox-backend.onrender.com";
 
 
+// Load submissions
+function loadSubmissions() {
+  fetch(`${API_URL}/submissions`)
+    .then(res => res.json())
+    .then(submissions => {
+      const ul = document.getElementById("submissions");
+      ul.innerHTML = "";
+      submissions.forEach(sub => {
+        const li = document.createElement("li");
+        li.textContent = `${sub.team}: ${sub.answer}`;
+        ul.appendChild(li);
+      });
+    })
+}
 
-    // Load submissions
-    function loadSubmissions() {
-      //the endpoint is at API_URL+/submissions
-      //You should retrieve the submissions and put them in the ul 'submissions'
-      
-    }
-
-    // Load scores
-    function loadScores() {
-      //the endpoint is at API_URL+/scores
-      //You should retrieve the submissions and put them in the ul 'scores'
-      
-    }
+function loadScores() {
+  fetch(`${API_URL}/scores`)
+    .then(res => res.json())
+    .then(scores => {
+      const ul = document.getElementById("scores");
+      ul.innerHTML = "";
+      scores.forEach(score => {
+        const li = document.createElement("li");
+        li.textContent = `${score.team}: ${score.points}`;
+        ul.appendChild(li);
+      });
+    })
+}
 
     // Handle form submission
     document.getElementById("answerForm").addEventListener("submit", function(e) {
       e.preventDefault();
+
       const team = document.getElementById("team").value;
       const answer = document.getElementById("answer").value;
+    
 
-      //post to the API_URL + /submit
-      //use correct headers
-      //api expects team and answer
-      //after a successful fetch, loadSubmissions()
+        const res = fetch(`https://jackbox-backend.onrender.com/submit`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ team, answer })
+        });
+    
+        document.getElementById("answer").value = "";
+    
+        // Reload submissions list
+        loadSubmissions();
         
     });
 

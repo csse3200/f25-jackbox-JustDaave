@@ -1,0 +1,27 @@
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6fa;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Headings */
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: #34495e;
+  }
+  
+  h3 {
+    margin-top: 30px;
+    color: #2c3e50;
+  }
